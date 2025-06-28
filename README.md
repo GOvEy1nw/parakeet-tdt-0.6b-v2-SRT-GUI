@@ -1,4 +1,3 @@
-
 # parakeet-tdt-0.6b-v2-SRT-GUI - A NeMo-based SRT Subtitle Generation Tool for Video/Audio
 
 This project uses the nvidia/parakeet-tdt-0.6b-v2 ASR (Automatic Speech Recognition) model to automatically generate timestamped SRT subtitle files from video or audio files. The interface is built with Gradio, making it easy for users to upload files and get results.
@@ -18,7 +17,6 @@ This project uses the nvidia/parakeet-tdt-0.6b-v2 ASR (Automatic Speech Recognit
 ## System Requirements
 
   * Python 3.12.2 or higher, to ensure compatibility with the latest NeMo library.
-  * **FFmpeg**: Used for audio/video decoding, encoding, and format conversion. **Must be installed separately and added to the system's PATH environment variable.**
   * NVIDIA GPU (recommended for acceleration, requires CUDA drivers). It can also run on a CPU if no GPU is present, but it will be very slow.
 
 ## Simplified Installation Steps (Windows)
@@ -33,23 +31,7 @@ This project uses the nvidia/parakeet-tdt-0.6b-v2 ASR (Automatic Speech Recognit
     It will create and activate a Python virtual environment while also checking for and installing dependencies.
     The installation of torch depends on whether you need GPU acceleration.
 
-3.  **Install FFmpeg:**
-    This project relies on FFmpeg for audio extraction and preprocessing. You need to install it separately and ensure its executable path is added to the system's PATH environment variable.
-
-      * **Windows:**
-        1.  Download a pre-compiled version from the official FFmpeg download page ([https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)) (e.g., builds from "gyan.dev" or "BtbN").
-        2.  Unzip the downloaded file.
-        3.  Add the path to the `bin` directory inside the unzipped folder (e.g., `C:\ffmpeg\bin`) to your system's `Path` environment variable.
-      * **Linux (Ubuntu/Debian, etc.):**
-        ```bash
-        sudo apt update && sudo apt install ffmpeg
-        ```
-      * **macOS (using Homebrew):**
-        ```bash
-        brew install ffmpeg
-        ```
-
-4.  **Double-click to open launcher.bat**
+3.  **Double-click to open launcher.bat**
     If your environment and dependencies are all installed correctly, you can run this project directly by double-clicking launcher.bat.
 
 ## Installation Steps
@@ -104,23 +86,7 @@ This project uses the nvidia/parakeet-tdt-0.6b-v2 ASR (Automatic Speech Recognit
     pip install -r requirements.txt
     ```
 
-5.  **Install FFmpeg:**
-    This project relies on FFmpeg for audio extraction and preprocessing. You need to install it separately and ensure its executable path is added to the system's PATH environment variable.
-
-      * **Windows:**
-        1.  Download a pre-compiled version from the official FFmpeg download page ([https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)) (e.g., builds from "gyan.dev" or "BtbN").
-        2.  Unzip the downloaded file.
-        3.  Add the path to the `bin` directory inside the unzipped folder (e.g., `C:\ffmpeg\bin`) to your system's `Path` environment variable.
-      * **Linux (Ubuntu/Debian, etc.):**
-        ```bash
-        sudo apt update && sudo apt install ffmpeg
-        ```
-      * **macOS (using Homebrew):**
-        ```bash
-        brew install ffmpeg
-        ```
-
-6.  **Double-click to open launcher.bat**
+5.  **Double-click to open launcher.bat**
     If your environment and dependencies are all installed correctly, you can run this project directly by double-clicking launcher.bat.
 
 ## Loading a Model Locally
@@ -177,7 +143,5 @@ Once processing is complete, you can preview the generated subtitle content in t
   * Processing large files or running on a CPU may take a significant amount of time. Please be patient.
 
   * When loading the cloud model for the first time, the model files need to be downloaded, and the time required will depend on your network speed.
-
-  * If you encounter any ffmpeg-related errors, please ensure that FFmpeg is installed and configured correctly.
 
   * If the script indicates it is running on the CPU, but you have an NVIDIA GPU and wish to use it, please double-check that PyTorch was installed correctly for the CUDA version (refer to point 3 of the "Installation Steps").

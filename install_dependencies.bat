@@ -67,21 +67,10 @@ echo requirements dependencies installation complete.
 
 echo.
 echo ===============================================================================
-echo Important Note: FFmpeg Installation (Required)
-echo ===============================================================================
-echo This project requires FFmpeg to run.
-echo Please ensure you have downloaded FFmpeg from https://ffmpeg.org/download.html (gyan.dev build recommended)
-echo and added the path to its 'bin' directory to the system's PATH environment variable.
-echo.
-echo How to check if FFmpeg is configured successfully:
-echo    Open a new command line window and type 'ffmpeg -version'. If it displays version information, it means it was successful.
-echo ===============================================================================
-echo.
 echo The installation process for all dependencies has been completed.
 echo.
 echo Next steps:
-echo    1. If you haven't configured FFmpeg yet, please do so now.
-echo    2. After configuration is complete, you can double-click 'launcher.bat' to start the application.
+echo    Double-click 'launcher.bat' to start the application.
 echo.
 pause
 exit /b

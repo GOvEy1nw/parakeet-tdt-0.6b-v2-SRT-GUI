@@ -1,11 +1,6 @@
-nemo_toolkit[asr]
-# Pydub for audio manipulation
-pydub>=0.25.1
+# nemo_toolkit[asr]
+# PyAV for audio decoding/encoding without external FFmpeg
+av>=11.0.0
 
 # Gradio for the web interface
-gradio>=5.29.0
-
-
-# Note on ffmpeg:
-# This project requires ffmpeg to be installed separately and available in the system PATH.
-# ffmpeg is not a Python package and cannot be installed via pip.
+gradio>=4.29.0
