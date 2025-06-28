@@ -1,92 +1,87 @@
 @echo off
-echo 开始环境配置和依赖安装...
-REM 检查 Python 是否安装
+echo Starting environment configuration and dependency installation...
+REM Check if Python is installed
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
-echo 错误：未找到 Python。请先安装Python 3.12.2 或更高版本 并将其添加到 PATH。
-echo 您可以从 https://www.python.org/downloads/ 下载。
+echo Error: Python not found. Please install Python 3.12.2 or higher and add it to the PATH.
+echo You can download it from https://www.python.org/downloads/.
 pause
 exit /b
 )
-echo Python 已检测到。
+echo Python has been detected.
 
 
-REM 检查虚拟环境是否存在
+REM Check if the virtual environment exists
 if not exist .\.venv\Scripts\activate.bat (
-	REM 创建虚拟环境
-	echo 正在创建虚拟环境 .venv...
+	REM Create the virtual environment
+	echo Creating virtual environment .venv...
 	python -m venv .venv
 	if %errorlevel% neq 0 (
-	echo 错误：创建虚拟环境失败。
+	echo Error: Failed to create the virtual environment.
 	pause
 	exit /b
 	)
-	echo 虚拟环境 .venv 创建成功。
+	echo Virtual environment .venv created successfully.
 )
 
-REM 激活虚拟环境
+REM Activate the virtual environment
 call .\.venv\Scripts\activate.bat
-echo 虚拟环境已激活。
+echo Virtual environment activated.
 
 echo.
 echo ===============================================================================
-echo 关于 PyTorch 安装 (重要！)：
+echo About PyTorch Installation (Important!):
 echo ===============================================================================
-echo 如果您有 NVIDIA GPU 并希望使用 CUDA 加速，强烈建议您：
-echo   1. 访问 PyTorch 官网 (https://pytorch.org/get-started/locally/)
-echo   2. 获取适合您 CUDA 版本的 PyTorch 安装命令。
-echo   3. 在【新的命令行窗口中先激活此虚拟环境(.venv\Scripts\activate)】，
-echo      然后【手动执行】该 PyTorch 安装命令。
-echo   4. 手动安装 PyTorch GPU 版本【之后】，再回到【此窗口】按 'n' 跳过自动安装。
+echo If you have an NVIDIA GPU and want to use CUDA acceleration, it is highly recommended that you:
+echo    1. Visit the PyTorch official website (https://pytorch.org/get-started/locally/)
+echo    2. Get the PyTorch installation command suitable for your CUDA version.
+echo    3. In a [new command line window, first activate this virtual environment (.venv\Scripts\activate)],
+echo       then [manually execute] that PyTorch installation command.
+echo    4. After manually installing the PyTorch GPU version, return to [this window] and press 'n' to skip the automatic installation.
 echo.
-echo 如果您不确定、只想使用 CPU，或者已手动安装 GPU 版 PyTorch，
-echo 脚本可以尝试安装一个通用的 PyTorch (通常是CPU版)，或者跳过。
+echo If you are not sure, only want to use the CPU, or have already manually installed the GPU version of PyTorch,
+echo the script can try to install a general PyTorch (usually the CPU version), or skip it.
 echo ===============================================================================
 echo.
 
 
-set /p choice="是否安装torch (cpu版本) 及其依赖？(y/n): "
+set /p choice="Do you want to install torch (cpu version) and its dependencies? (y/n): "
 if /i "%choice%"=="y" (
-	echo 正在安装torch及其依赖
+	echo Installing torch and its dependencies
 
 	pip install -r requirements.txt
 
 	if %errorlevel% neq 0 (
-		echo 错误：安装依赖失败。
+		echo Error: Failed to install dependencies.
 		pause
 		exit /b
 	)
-	echo 依赖安装成功。
+	echo Dependencies installed successfully.
 ) else (
 		pause
 		exit /b
 )
  
 
-echo requirements依赖安装完成。
+echo requirements dependencies installation complete.
 
 echo.
 echo ===============================================================================
-echo 重要提示：FFmpeg 安装 (必需)
+echo Important Note: FFmpeg Installation (Required)
 echo ===============================================================================
-echo 本项目运行需要 FFmpeg。
-echo 请确保您已从 https://ffmpeg.org/download.html (推荐 gyan.dev 构建)
-echo 下载 FFmpeg，并将其中的 'bin' 目录路径添加到系统的 PATH 环境变量中。
+echo This project requires FFmpeg to run.
+echo Please ensure you have downloaded FFmpeg from https://ffmpeg.org/download.html (gyan.dev build recommended)
+echo and added the path to its 'bin' directory to the system's PATH environment variable.
 echo.
-echo 如何检查FFmpeg是否配置成功：
-echo   打开一个新的命令行窗口，输入 'ffmpeg -version'，如果显示版本信息则表示成功。
+echo How to check if FFmpeg is configured successfully:
+echo    Open a new command line window and type 'ffmpeg -version'. If it displays version information, it means it was successful.
 echo ===============================================================================
 echo.
-echo 所有依赖项的安装流程已执行完毕。
+echo The installation process for all dependencies has been completed.
 echo.
-echo 下一步：
-echo   1. 如果您尚未配置 FFmpeg，请立即配置。
-echo   2. 配置完成后，您可以双击运行 'launcher.bat' 来启动应用程序。
+echo Next steps:
+echo    1. If you haven't configured FFmpeg yet, please do so now.
+echo    2. After configuration is complete, you can double-click 'launcher.bat' to start the application.
 echo.
 pause
 exit /b
-
-
-
-
-
