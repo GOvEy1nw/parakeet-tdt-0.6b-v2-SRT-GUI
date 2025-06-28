@@ -1,187 +1,183 @@
 
-#parakeet-tdt-0.6b-v2-SRT-GUI - NeMo based video/audioSRT subtitle generation tool
+# parakeet-tdt-0.6b-v2-SRT-GUI - A NeMo-based SRT Subtitle Generation Tool for Video/Audio
 
-The project uses the nvidia/parakeet-tdt-0.6b-v2 ASR (Auto-Voice Recognition) model to automatically generate SRT subtitle files with timetamps from video or audio files. The interface is constructed through Gradio to facilitate user uploading of files and obtaining results.
+This project uses the nvidia/parakeet-tdt-0.6b-v2 ASR (Automatic Speech Recognition) model to automatically generate timestamped SRT subtitle files from video or audio files. The interface is built with Gradio, making it easy for users to upload files and get results.
 
-## Main function
+## Main Features
 
-* Extracting audio from a variety of common video formats (e. g. MP4, MKV, AVI) and generating SRT subtitles.
-* Directly processing a variety of common audio formats (e.g. MP3, WAV, M4A, FLAC) to generate SRT subtitles.
-* Support long video and audio input
-* Supports pre-training on NVIDIA NGC Parakeet cloud model (default `nvidia/parakeet-tdt-0.6b-v2 ' ).
-* Support the loading of local `.nemo ' model files of users.
-* The length of sections that can be adjusted for audio processing to strike a balance between speed and context consistency.
-* Auto-detect CUDA GPU, with priority given to GPU for accelerated processing; if no GPU, run on CPU (lower speed).
-* User-friendly interfaces and simple operations.
-* Automatically save the model and segment length configuration selected by the user.
+  * Extract audio from various common video formats (e.g., MP4, MKV, AVI) and generate SRT subtitles.
+  * Directly process various common audio formats (e.g., MP3, WAV, M4A, FLAC) to generate SRT subtitles.
+  * Supports long video and long audio inputs.
+  * Supports loading the pre-trained Parakeet cloud model from NVIDIA NGC (defaults to `nvidia/parakeet-tdt-0.6b-v2`).
+  * Supports loading local `.nemo` model files from the user.
+  * Adjustable audio processing chunk length to balance speed and contextual coherence.
+  * Automatically detects a CUDA GPU and prioritizes its use for accelerated processing; runs on the CPU if no GPU is available (slower).
+  * User-friendly interface with simple operations.
+  * Automatically saves the user's selected model and chunk length configuration.
 
+## System Requirements
 
+  * Python 3.12.2 or higher, to ensure compatibility with the latest NeMo library.
+  * **FFmpeg**: Used for audio/video decoding, encoding, and format conversion. **Must be installed separately and added to the system's PATH environment variable.**
+  * NVIDIA GPU (recommended for acceleration, requires CUDA drivers). It can also run on a CPU if no GPU is present, but it will be very slow.
 
+## Simplified Installation Steps (Windows)
 
+1.  **Clone this repository:**
 
-## Environmental requirements
-
-* Python 3.12.2 or higher to ensure compatibility with the latest NeMo library
-* **FFmpeg**: for sound and video decoding and formatting. ** Must be installed and configured separately to the system PATH environment variable. **
-* NVIDIA GPU (recommended for acceleration, CUDA driven). If you don't have GPU, you can run on CPU, but at very slow speed.
-
-## Simplified installation steps (windows)
-
-1. **Clone Repo:**
-```bash
-git clone https://github.com/NINIYOYYO/parakeet-tdt-0.6b-v2-SRT-GUI.git
-````
-
-2.  **Double click to open install_dependencies.bat**
-It creates and activates the Python virtual environment while checking and installing dependency.
-Toch's installation depends on whether you need the GPU to accelerate.
-    
-
-3. ** Installed FFmpeg:**
-This project relies on FFmpeg for audio extraction and pre-processing. You need to install it separately and ensure that its executable path is added to the system's PATH environment variable.
-
-
-** Windows:**
-1. Download pre-edited versions (e.g. construction from "gyan.dev" or "BtbN") from the FFmpeg official web page ([https://ffmpeg.org/download.html].
-2. Depressed documents.
-Add the `bin ' directory path (e. g. `C:\ffmpeg\bin ') to the system environment variable `Path ' in the depressed folder.
-*   **Linux (Ubuntu/Debian):**
     ```bash
-    sudo apt update && sudo apt install ffmpeg
+    git clone https://github.com/NINIYOYYO/parakeet-tdt-0.6b-v2-SRT-GUI.git
     ```
-* ** MacOS (using Homebrew):**
-```bash
-brew install ffmpeg
-```
 
-3. ** Double click to open launcher.bat**
-If your environment and your dependency are installed, double-click on lancher.bat will run the project.
+2.  **Double-click to open install\_dependencies.bat**
+    It will create and activate a Python virtual environment while also checking for and installing dependencies.
+    The installation of torch depends on whether you need GPU acceleration.
 
+3.  **Install FFmpeg:**
+    This project relies on FFmpeg for audio extraction and preprocessing. You need to install it separately and ensure its executable path is added to the system's PATH environment variable.
 
+      * **Windows:**
+        1.  Download a pre-compiled version from the official FFmpeg download page ([https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)) (e.g., builds from "gyan.dev" or "BtbN").
+        2.  Unzip the downloaded file.
+        3.  Add the path to the `bin` directory inside the unzipped folder (e.g., `C:\ffmpeg\bin`) to your system's `Path` environment variable.
+      * **Linux (Ubuntu/Debian, etc.):**
+        ```bash
+        sudo apt update && sudo apt install ffmpeg
+        ```
+      * **macOS (using Homebrew):**
+        ```bash
+        brew install ffmpeg
+        ```
 
+4.  **Double-click to open launcher.bat**
+    If your environment and dependencies are all installed correctly, you can run this project directly by double-clicking launcher.bat.
 
-# Installation steps
+## Installation Steps
 
-1. **Cloned warehouse:**
-```bash
-Gymnasium, glitcone https://github.com/NINYYO/parakeet-tdt-0.6b-v2-SRT-GUI.git
-````
+1.  **Clone this repository:**
 
-2. ** Create and activate the Python virtual environment (recommended strongly):**
-```bash
-I don't know.
-````
-* Windows:
-```bash
-....venv\scripts\activate
-````
-? MacOS / Linux:
-```bash
-I'm sorry, I'm sorry.
-````
+    ```bash
+    git clone https://github.com/NINIYOYYO/parakeet-tdt-0.6b-v2-SRT-GUI.git
+    ```
 
-3. **PyTorch installation (important: GPU user please pay particular attention! ):**
-If you want to use NVIDIA GPU for accelerated processing (recommended strongly),** you must manually install a PyTorch version compatible with your CUDA environment before installing other dependencies. **
-* Enter Win+R key to open the Windows system ' s running window and enter CMD into terminal input
-```bash
-nvidia-smi
-````
-CUDA Version:
-* Access to [PyTorch official network installation guide page] (https://pytorch.org/get-stard/locally/).
-* Select the correct installation command based on your operating system, package manager (recommended `pip ' ), computing platform (e.g. CUDA 11.8, CUDA 12.1) and Python versions.
-:: For example, if you use `pip ' and your system has a CUDA 12.1 environment, you can run:
-```bash
-Pip3 install tooltochvision Tochaudio-index-url https://download.pytorch.org/whl/cu121
-````
-If you skip this step, or your system does not have NVIDIA GPU, the `nemo_toolkit ' of subsequent installation may by default install a PyTorch version that only supports CPU.
+2.  **Create and activate a Python virtual environment (highly recommended):**
 
-4.** Reliance on installation projects:**
-Runs:
-```bash
-Pip install-r reviews.txt
-````
-(See below for examples of `requirements.txt ' )
+    ```bash
+    python -m venv .venv
+    ```
 
-5. ** Installed FFmpeg:**
-This project relies on FFmpeg for audio extraction and pre-processing. You need to install it separately and ensure that its executable path is added to the system's PATH environment variable.
-** Windows:**
-1. Download pre-edited versions (e.g. construction from "gyan.dev" or "BtbN") from the FFmpeg official web page ([https://ffmpeg.org/download.html].
-2. Depressed documents.
-Add the `bin ' directory path (e. g. `C:\ffmpeg\bin ') to the system environment variable `Path ' in the depressed folder.
-* ** Linux (Ubuntu/Debian et al.):**
-```bash
-Sodo apt update & sub apt install ffmpeg
-````
-* ** MacOS (using Homebrew):**
-```bash
-I'm sorry.
-````
-6. ** Double click to open launcher.bat**
-If your environment and your dependency are installed, double-click on lancher.bat will run the project.
+      * Windows:
+        ```bash
+        .\.venv\Scripts\activate
+        ```
+      * macOS / Linux:
+        ```bash
+        source .venv/bin/activate
+        ```
 
+3.  **Install PyTorch (Important: GPU users, pay special attention\!):**
+    If you want to use an NVIDIA GPU for accelerated processing (highly recommended), **be sure to manually install a version of PyTorch compatible with your CUDA environment before installing other dependencies.**
 
+      * Press Win+R to open the Windows Run dialog, type CMD, and press Enter to open a terminal. In the terminal, type:
 
-# Loading models from local
-** If you want to load the nvidia/parakeet-tdt-0.6b-v2 model locally, enter the model's local path on the local model path (.nemo file) at initial start**
-** e.g. C: \Users\models -- nvidia -- paraket-tdt-0.6b-v2\snapsshots\30c5e6f557f6ba26e5819a99ed2e86f670186b43f\parakeet-tdt-0.6b-v2.nemo**
+    <!-- end list -->
 
+    ```bash
+    nvidia-smi
+    ```
 
+    and press Enter to check your CUDA Version:
 
-# Interface presentation
-! [Interface Presentation] (./RESADME.assets/1.png)
+      * Visit the [official PyTorch installation guide page](https://pytorch.org/get-started/locally/).
+      * Select the correct installation command based on your operating system, package manager (pip recommended), compute platform (e.g., CUDA 11.8, CUDA 12.1), and Python version.
+      * For example, if you are using `pip` and your system has a CUDA 12.1 environment, you can run:
+        ```bash
+        pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+        ```
 
+    If you skip this step, or if your system does not have an NVIDIA GPU, the `nemo_toolkit` installed later may default to installing a CPU-only version of PyTorch.
 
+4.  **Install project dependencies:**
+    After activating the virtual environment and (optionally) installing a specific version of PyTorch, run:
 
+    ```bash
+    pip install -r requirements.txt
+    ```
 
+5.  **Install FFmpeg:**
+    This project relies on FFmpeg for audio extraction and preprocessing. You need to install it separately and ensure its executable path is added to the system's PATH environment variable.
 
-Use method
+      * **Windows:**
+        1.  Download a pre-compiled version from the official FFmpeg download page ([https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)) (e.g., builds from "gyan.dev" or "BtbN").
+        2.  Unzip the downloaded file.
+        3.  Add the path to the `bin` directory inside the unzipped folder (e.g., `C:\ffmpeg\bin`) to your system's `Path` environment variable.
+      * **Linux (Ubuntu/Debian, etc.):**
+        ```bash
+        sudo apt update && sudo apt install ffmpeg
+        ```
+      * **macOS (using Homebrew):**
+        ```bash
+        brew install ffmpeg
+        ```
 
-Ensure that you have completed the environmental configuration and dependency installation in accordance with the above steps.
+6.  **Double-click to open launcher.bat**
+    If your environment and dependencies are all installed correctly, you can run this project directly by double-clicking launcher.bat.
 
-In the root directory, run the main script:
+## Loading a Model Locally
 
-Start in two ways.
-1. ** Run launcher.bat start**
+**If you want to load the nvidia/parakeet-tdt-0.6b-v2 model locally, when you first launch the application, enter the local path of the model in the "Local Model Path (.nemo file)" input field.**
+**For example: C:\\Users\\models--nvidia--parakeet-tdt-0.6b-v2\\snapshots\\30c5e6f557f6ba26e5819a9ed2e86f670186b43f\\parakeet-tdt-0.6b-v2.nemo**
 
-2. ** Start at terminal (entry into virtual environment)**
-```bash
-I'm sorry, Python Main.
-````
+## Interface Showcase
 
+## How to Use
 
+Ensure you have completed the environment setup and dependency installation as described in the steps above.
 
-A local URL (usually http://127.0.0.1:7860 or similar address) is printed at the terminal after the script starts. Open this URL in the browser to access the Gradio user interface.
+In the project's root directory, run the main script.
 
-Model selection and loading:
+There are two ways to launch the application:
 
-Local model: Fill in the full path of your .nemo model file in the local model path input box, then click on the loading local model button.
+1.  **Run by launching launcher.bat**
 
-Cloud End Model: Click the "Build Cloud End Model" button to download and load the default Parakeet model from NVIDIA NGC.
+2.  **Launch from the terminal (after entering the virtual environment)**
 
-Models are displayed in text boxes below.
+    ```bash
+    python main.py
+    ```
 
-Adjust the length of the audio segment:
-Use the slider to adjust the length of the audio segment in seconds. Larger segments can retain more context but may increase processing time and memory consumption. The recommended range is 60-180 seconds. This setting is saved with the model selection next time you click any Load Model button.
+After the script starts, it will print a local URL in the terminal (usually http://127.0.0.1:7860 or a similar address). Open this URL in your browser to access the Gradio user interface.
 
-Upload files and generate subtitles:
+### Model Selection and Loading:
 
-From Video Generation: Switch to the "Subtitle From Video" tab page, click on the video upload area to upload your video file, and click on the "Start from Video Generation SRT" button.
+  * **Local Model**: In the "Local Model Path" input box, enter the full path to your .nemo model file, then click the "Load Local Model" button.
 
-From Audio Generation: Switch to the "Subtitles from Audio" tab, click on the audio upload area to upload your audio file, and click on the "Start SRT" button.
+  * **Cloud Model**: Simply click the "Load Cloud Model" button, and the default Parakeet model will be downloaded and loaded from NVIDIA NGC.
 
-View and download results:
+The model's loading status will be displayed in the text box below.
 
-The processing status is updated in real time.
+### Adjusting the Audio Chunk Length:
 
-After processing, you can preview the subtitles generated in the SRT Subtitles area and click Download SRT Files to download the .srt subtitle files.
+Use the slider to adjust the "Audio Chunk Length (seconds)". Larger chunks can preserve more context but may increase processing time and memory consumption. The recommended range is 60-180 seconds. This setting will be saved along with your model choice the next time you click either "Load Model" button.
 
-Attention
+### Uploading a File and Generating Subtitles:
 
-It may take longer to process large files or run on CPUs.
+  * **From Video**: Switch to the "Generate Subtitles from Video" tab, upload your video file by clicking on the video upload area, and then click the "Start Generating SRT from Video" button.
 
-When you first load a cloud-end model, you need to download the model file, depending on your network speed.
+  * **From Audio**: Switch to the "Generate Subtitles from Audio" tab, upload your audio file by clicking on the audio upload area, and then click the "Start Generating SRT from Audio" button.
 
-If you have a ffmpeg-related error, make sure that FFmpeg is installed and configured correctly.
+### Viewing and Downloading Results:
 
-If the script hint is running on CPU, but you have NVIDIA GPU and want to use it, check whether PyTorch has been correctly installed as CUDA version (reference point 3 of "Step of installation " ).
+The processing status will update in real-time.
 
+Once processing is complete, you can preview the generated subtitle content in the "SRT Subtitle Results" area and download the .srt subtitle file by clicking the "Download SRT File" link.
+
+## Notes
+
+  * Processing large files or running on a CPU may take a significant amount of time. Please be patient.
+
+  * When loading the cloud model for the first time, the model files need to be downloaded, and the time required will depend on your network speed.
+
+  * If you encounter any ffmpeg-related errors, please ensure that FFmpeg is installed and configured correctly.
+
+  * If the script indicates it is running on the CPU, but you have an NVIDIA GPU and wish to use it, please double-check that PyTorch was installed correctly for the CUDA version (refer to point 3 of the "Installation Steps").
